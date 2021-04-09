@@ -1,27 +1,34 @@
-import React from "react";
-import HomePresenter from "./HomePresenter";
+import React, { useEffect, useState } from "react";
+// import HomePresenter from "./HomePresenter";
 import { productItems } from "../../data/productItems";
+import Card from "../../Components/Card"
+import styled from "styled-components";
 
-export default class extends React.Component {
-  state = {
-    items : null
-  };
-  componentDidMount() {
-    const datas = productItems
-    datas.sort(function (a,b){
+const Container = styled.div`
+  padding: 100px;
+`;
+function Home() {
+  const [items, setItems] = useState(productItems);
+  
+  useEffect(() => {
+
+    setItems(items => items.sort(function (a,b){
       return b.score-a.score
-    })
-    this.setState({
-      items : datas
-    })
-  }
+    }));
+  }, []);
 
-  render() {
-    const { items } = this.state;
-    console.log(items)
-    return (
-      <HomePresenter 
-      productItems={items} />
-    )
-  }
+  return (
+    <Container>
+    {productItems && productItems.map(item => (
+        <Card
+          key={item.id}
+          id={item.id}
+          imageUrl={item.coverImage}
+          title={item.title}
+        />
+      ))}
+  </Container>
+  )
 }
+
+export default Home;
