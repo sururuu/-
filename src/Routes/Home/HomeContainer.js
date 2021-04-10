@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import HomePresenter from "./HomePresenter";
 import { productItems } from "../../data/productItems";
 import Card from "../../Components/Card"
 import styled from "styled-components";
