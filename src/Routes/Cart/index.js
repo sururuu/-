@@ -1,1 +1,3 @@
-export default () => "cart";
+import CartContainer from "./CartContainer";
+
+export default CartContainer

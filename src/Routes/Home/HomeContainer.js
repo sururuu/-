@@ -11,7 +11,6 @@ function Home() {
   const [items, setItems] = useState(productItems);
   
   useEffect(() => {
-
     setItems(items => items.sort(function (a,b){
       return b.score-a.score
     }));
@@ -23,8 +22,7 @@ function Home() {
         <Card
           key={item.id}
           id={item.id}
-          imageUrl={item.coverImage}
-          title={item.title}
+          item={item}
         />
       ))}
   </Container>

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addCart } from "../store/actions";
 
 const Container = styled.div`
   font-size: 12px;
@@ -20,6 +22,10 @@ const Title = styled.span`
   margin-bottom: 3px;
 `;
 
+const Price = styled.span`
+  display: block;
+  margin-bottom: 3px;
+`
 const ImageContainer = styled.div`
   margin-bottom: 5px;
   position: relative;
@@ -30,18 +36,24 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Card = ({ id, imageUrl, title }) => (
+const Card = ({ item }) => {
+  const dispatch = useDispatch();
+  return(
     <Container>
       <ImageContainer>
         <Image
-          bgUrl={imageUrl}
+          bgUrl={item.coverImage}
         />
       </ImageContainer>
       <Title>
-        {title}
+        {item.title}
       </Title>
+      <Price>
+       {item.price}
+      </Price>
+      <button onClick={() => dispatch(addCart(item)) }>장바구니</button>
     </Container>
-);
+)};
 
 Card.propTypes = {
   id: PropTypes.string,
