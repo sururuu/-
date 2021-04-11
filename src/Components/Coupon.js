@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -15,11 +14,12 @@ const Container = styled.div`
 `;
 
 
-const Coupon = ({ coupons }) => {
+const Coupon = ({ coupons,setTicket }) => {
   const [coupon,setCoupon] = useState('')
 
   function SelectItem(eventKey) {
     setCoupon(eventKey)
+    setTicket(eventKey)
   }
 
   const eventKey = '쿠폰선택'
