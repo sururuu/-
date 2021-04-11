@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Coupon = ({ sum, ticket }) => {
 
-  const sale = (ticket === '10% 할인 쿠폰') ? sum*0.9 : sum-10000
+  const sale = (ticket === '10% 할인 쿠폰') ? Math.floor(sum*0.9) : sum-10000
   return(
     <Container>
       {sum} - {ticket} = {sale}
