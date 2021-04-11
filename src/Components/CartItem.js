@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { deleteCart } from "../store/actions";
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +33,11 @@ const Price = styled.span`
 `
 
 const CartItem = ({ item }) => {
-  console.log(item)
+  if (item.availableCoupon === false) {
+    console.log('쿠폰 x')
+  }
+  const dispatch = useDispatch();
+
   return(
     <Container>
       <Image 
@@ -41,7 +47,7 @@ const CartItem = ({ item }) => {
       />
       <Title>{item.title}</Title>
       <Price className="cart-item-price">{item.price}원</Price>
-      <i className="fas fa-trash-alt"></i>
+      <button onClick={() => dispatch(deleteCart(item)) }>❌</button>
     </Container>
 )};
 
