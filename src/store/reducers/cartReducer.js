@@ -1,10 +1,9 @@
 const cartReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      console.log(state)
       return [...state,action.payload];
     case "DELETE_ITEM":
-      return [...action.payload];
+      return state.filter(item => item.id !== action.payload.id)
     default:
       return state;
   }
