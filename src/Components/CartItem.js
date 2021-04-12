@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
@@ -32,14 +32,26 @@ const Price = styled.span`
   color: red;
 `
 
-const CartItem = ({ item }) => {
-  if (item.availableCoupon === false) {
-    console.log('쿠폰 x')
-  }
+const CartItem = ({ item, setCalitem }) => {
+  useEffect(() => {
+    test()
+  }, []);
   const dispatch = useDispatch();
-
+  function test() {
+    var obj_length = document.getElementsByName("target").length;
+    var new_cart = [];
+    for (var i=0; i<obj_length; i++) {
+      const target_obj = document.getElementsByName("target")[i]
+        if (target_obj.checked === true) {
+             const id = target_obj.value
+             new_cart.push(id)
+        }
+    }
+    setCalitem(new_cart)
+  }
   return(
     <Container>
+      <input type="checkbox" name="target" defaultChecked onClick={test} value={item.id} ></input>
       <Image 
       className="cart-item-image"
       alt="cart-item" 

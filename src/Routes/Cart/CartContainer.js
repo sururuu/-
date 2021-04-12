@@ -17,10 +17,16 @@ function Cart() {
       return <CartItme key={idx} item={item} idx={idx} setCalitem={setCalitem} />
   }) : <div>장바구니가 비어 있습니다</div>
   var initialValue = 0;
-  var totalSum = cart.reduce(function (acc,curValue) {
+  const targetItem = []
+  for (var i=0; i<cart.length; i++) {
+    if (calitem.includes(cart[i].id)) {
+      targetItem.push(cart[i])
+    }
+  }
+  var totalSum = targetItem.reduce(function (acc,curValue) {
     return acc + curValue.price
   },initialValue)
-  const price = cart.filter(item => item.availableCoupon !== false)
+  const price = targetItem.filter(item => item.availableCoupon !== false)
   var sum = price.reduce(function (acc,curValue) {
   return acc + curValue.price;
   },initialValue)
