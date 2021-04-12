@@ -11,14 +11,16 @@ const Container = styled.div`
 `;
 function Cart() {
   const [ticket,setTicket] = useState("")
-
+  const [calitem, setCalitem] = useState("")
   const cart = useSelector(store => store.cartReducer);
   const cartItem = cart.length >= 1 ? cart.map((item, idx) => {
-      return <CartItme key={idx} item={item} idx={idx} />
+      return <CartItme key={idx} item={item} idx={idx} setCalitem={setCalitem} />
   }) : <div>장바구니가 비어 있습니다</div>
-
-  const price = cart.filter(item => item.availableCoupon !== false)
   var initialValue = 0;
+  var totalSum = cart.reduce(function (acc,curValue) {
+    return acc + curValue.price
+  },initialValue)
+  const price = cart.filter(item => item.availableCoupon !== false)
   var sum = price.reduce(function (acc,curValue) {
   return acc + curValue.price;
   },initialValue)
@@ -31,7 +33,7 @@ function Cart() {
           <h2>쿠폰</h2>
           <Coupon coupons={coupons} setTicket={setTicket} />
           <h2>결제</h2>
-          <Payment sum={sum} ticket={ticket} />
+          <Payment totalSum={totalSum} sum={sum} ticket={ticket} />
       </Container>
     </>
   );
